@@ -1,0 +1,11 @@
+Copyright 2020 by Michael F. Byrne, Robert M. Hyatt (original author of the "watcher", "submit" and "getelo" scripts used in testing by authors of the chess engine Crafty). The scripts offered here were directly derived from the scripts Robert Hyatt had originally written.
+
+Although significantly modified since originally used by Crafty, the principle concept has remained unchanged. Run an automated chess match via a script which calls a chess match program, and calls two other scripts to report back results back to the user on a periodic basis in a meaningful summary view so that the user can easily decipher the ongoing match results while remote from the actual chess-playing servers.  
+
+This script was designed specifically to work with the cutechess-client match program. The original scripts written by Robert Hyatt worked with his own proprietary program, which was called "match".
+
+__________________________________________________________________________________
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.

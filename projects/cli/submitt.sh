@@ -1,19 +1,6 @@
 #!/bin/bash
 
-### Copyright 2020 by Michael F. Byrne, Robert M. Hyatt (original author
-### of the "Watcher", "Submit" and "GetELo" scripts used in testing by the
-### chess engine Crafty authors).
-
-### Although signifciantly modified since used with Crafty, the main concept
-### has remained unchanged. Run an automated chess match via a script which
-### calls a match porgram while sultaneouly calling otehrs scripts to report
-### back teh resultsand have the scripts report back to the user on a peridioc
-### basis in a meaningful summary view so that the user can easily decipher
-### the test results while remote from the actual servers running the match.
-### This scropt was desigend specially to work with the cutechess-client match
-### program  The oriinal scripst authored by Robery Hyatt worked with his own
-### proprietayry program which he called "Match"
-
+### Copyright 2020 Michael F. Byrne, Robert M. Hyatt
 ### This program is free software: you can redistribute it and/or modify
 ### it under the terms of the GNU General Public License as published by
 ### the Free Software Foundation, either version 3 of the License, or
@@ -26,6 +13,7 @@
 ###
 ###  You should have received a copy of the GNU General Public License
 ###  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 clear
 set echo on
 DATE=$(shell date +"%y%m%d%H%M-")
@@ -36,7 +24,7 @@ export PATH=$PATH:.
 ### USER OPTIONS
 base=60
 ROUNDS=2000  # total num of games will be ( num of engines * (num of engines -1) * rounds
-CONCUR=25   ## reflects num of comcurrent games . should be less than # of logical CPUS
+CONCUR=25   ## reflects num of comcurrent games . THREADS * CONCUR should ALWAYS be less than # of logical CPUS
 NUMENG=2    # num of engines
 
 ### ENGINE options
@@ -61,9 +49,6 @@ OFILE="C:/cluster.mfb/Popcnt-LP/books/NBSC_30k_5mvs.epd"
 ORDER="random"   # other option -> sequential
 TOUR="round-robin"
 ENGINES=2  ## of engines
-
-
-
 pgn="c:/cluster.mfb/pgn/$DATE$ENG1$ENG2.pgn";
 #pgn="c:/cluster.mfb/pgn/test.pgn"
 echo $pgn

@@ -1,8 +1,10 @@
 Copyright 2020 by Michael F. Byrne, Robert M. Hyatt (original author of the "watcher", "submit" and "getelo" scripts used in testing by authors of the chess engine Crafty). The scripts offered here were directly derived from the scripts Robert Hyatt had originally written.
 
-Although significantly modified since originally used by Crafty, the principle concept has remained unchanged. Run an automated chess match via a script which calls a chess match program, and calls two other scripts to report back results back to the user on a periodic basis in a meaningful summary view so that the user can easily decipher the ongoing match results while remote from the actual chess-playing servers.  
+Although significantly modified since originally used by Crafty, the principle concept has remained unchanged. Run an automated chess match via a script which calls a chess match program, and calls two other scripts to report back results back to the user on a periodic basis in a meaningful summary view so that the user can easily decipher the ongoing match results while remote from the actual chess-playing servers.
 
-This script was designed specifically to work with the cutechess-client match program. The original scripts written by Robert Hyatt worked with his own proprietary program, which was called "match".
+This script was designed specifically to work with the cutechess-client match program. The original scripts written by Robert Hyatt worked with his own proprietary program, which was called "match". The scripts also call bayeselo, written by Remi Coulom,  which can be found here https://github.com/MichaelB7/bayeselo.
+
+
 
 __________________________________________________________________________________
 

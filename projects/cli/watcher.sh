@@ -14,14 +14,14 @@
 ###  You should have received a copy of the GNU General Public License
 ###  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-clear
+
 echo
-let secs=3*$elo_chk                                            ## 3 time more time for the inital loop
-#secs=0                                                        ## unhash tag to debug
+let secs=$elo_chk*2                                                              ## 3 time more time for the inital loop
+#secs=0                                                                          ## unhash tag to debug and avoid wait
 echo ""
 
-while [ $secs -gt -1 ]; do                                     ## Initial loop has a litte more time to allow time for games to complete
-  echo -ne "  ...seconds remaining:   $secs\033[0K\r"          ##  terminal screen countdown before proceeding
+while [ $secs -gt -1 ]; do                                                       ## Initial loop has a litte more time to allow time for overruns
+  echo -ne "  ...seconds remaining:   $secs\033[0K\r"                            ##  terminal screen countdown before proceeding
   sleep 1
   : $((secs--))
 done
@@ -29,34 +29,35 @@ clear
 let chk=$checknum*81/100
 let chk=$checknum
 let chkr=$checknum
-let chk=$chk-1
-#echo "loops: $chk"                                             ## to debug, the loop count is the number of updates
-for i in `seq 1 $chk`;                                          ## loop to check current results
+let chk=$chk
+#echo "loops: $chk"                                                              ## to debug, the loop count is the number of updates
+for i in `seq 1 $chk`;                                                           ## loop to check current results
 do
-  echo " "                                                      ## terminal screen
-  getelo.sh                                                     ## terminal screen
-  echo " "                                                      ## terminal screen
-  echo " " >> C:/Users/MichaelB7/Dropbox/elo.txt                ## to push results to dropbox for remote vieiwng
-  getelo.sh >> getelo.sh >> C:/Users/MichaelB7/Dropbox/elo.txt  ## to push results to dropbox for remote vieiwng
-  echo " " >> C:/Users/MichaelB7/Dropbox/elo.txt                ## to push results to dropbox for remote vieiwng
-  echo " "                                                      ## terminal screen
-  cp $pgn C:/Users/MichaelB7/Dropbox                            ## to push results to dropbox for remote vieiwng
-  echo "loops/scheduled: $i/$chkr"                              ## terminal screen
-
-  echo ""                                                       ## terminal screen
-  let secs=$elo_chk; echo "waiting: $elo_chk"                   ## countdown in seconds for the next update
+  echo " "                                                                       ## terminal screen
+  getelo.sh                                                                      ## terminal screen
+  echo " "                                                                       ## terminal screen
+  echo " " >> C:/Users/MichaelB7/Dropbox/elo.txt                                 ## push results to dropbox for remote vieiwng
+  getelo.sh >> getelo.sh >> C:/Users/MichaelB7/Dropbox/elo.txt                   ## push results to dropbox for remote vieiwng
+  echo " " >> C:/Users/MichaelB7/Dropbox/elo.txt                                 ## push results to dropbox for remote vieiwng
+  echo " "                                                                       ## terminal screen
+  cp $pgn C:/Users/MichaelB7/Dropbox                                             ## push results to dropbox for remote vieiwng
+  echo "loops/scheduled: $i/$chkr"                                               ## terminal screen
+  echo "loops/scheduled: $i/$chkr" >> C:/Users/MichaelB7/Dropbox/elo.txt         ## dropbox
+  echo ""                                                                        ## terminal screen
+  echo " " >> C:/Users/MichaelB7/Dropbox/elo.txt                                 ## dropbox
+  let secs=$elo_chk; echo "waiting: $elo_chk"                                    ## countdown in seconds for the next update
   while [ $secs -gt -1 ]; do
-	  echo -ne "  ...seconds remaining:   $secs\033[0K\r"         ##  terminal screen countdown
+	  echo -ne "  ...seconds remaining:   $secs\033[0K\r"                          ## terminal screen countdown
 	  sleep 1
 	  : $((secs--))
   done
-clear                                                           ## clears the terminal, hash tag out to debug
+clear                                                                            ## clears the terminal, hash tag out to debug
 done
 
-echo ""                                                         ## output to terminal screen
-echo ""                                                         ## "" ""  to terminal screen
-echo "done"                                                     ## "" ""  to terminal screen
-#read                                                           ## hack, un hashtag to keep terminal open upon completion, for debugginh
+echo ""                                                                          ## output to terminal screen
+echo ""                                                                          ## "" ""  to terminal screen
+echo "done"                                                                      ## "" ""  to terminal screen
+read                                                                             ## hack, un hashtag to keep terminal open upon completion, for debugginh
 exit
 
 

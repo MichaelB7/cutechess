@@ -16,7 +16,7 @@
 
 
 echo
-let secs=$elo_chk*2                                                              ## 3 time more time for the inital loop
+let secs=2*$elo_chk                                                              ## 3 time more time for the inital loop
 #secs=0                                                                          ## unhash tag to debug and avoid wait
 echo ""
 

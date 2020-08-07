@@ -1,0 +1,139 @@
+PGN File: .pgn
+Time Control: Time Control-> base+inc: 6+0.060
+Games: 30
+Threads: 1
+Hash: 16
+
+Current date : time (EDST)
+Date: 08/07/20 : 04:28:52
+
+Projected-> Time: 0h:3m:7s
+     Run -> Time: 0h:0m:1s
+
+PGN File: .pgn
+Time Control: Time Control-> base+inc: 6+0.060
+Games: 30
+Threads: 1
+Hash: 16
+
+Current date : time (EDST)
+Date: 08/07/20 : 04:30:58
+
+Projected-> Time: 0h:3m:7s
+     Run -> Time: 0h:0m:0s
+
+PGN File: .pgn
+Time Control: Time Control-> base+inc: 6+0.060
+Games: 30
+Threads: 1
+Hash: 16
+
+Current date : time (EDST)
+Date: 08/07/20 : 04:36:05
+
+Projected-> Time: 0h:3m:7s
+     Run -> Time: 0h:3m:13s
+
+PGN File: .pgn
+Time Control: Time Control-> base+inc: 6+0.060
+Games: 10
+Threads: 1
+Hash: 16
+
+Current date : time (EDST)
+Date: 08/07/20 : 04:43:46
+
+Projected-> Time: 0h:1m:15s
+     Run -> Time: 0h:1m:17s
+
+Rank Name  Rating   Δ     +    -     #     Σ    Σ%     W    L    D   W%    =%   OppR 
+---------------------------------------------------------------------------------------------------------
+
+   1 Mike   3546   0.0   74   74    40   25.5  63.7   17    6   17  42.5  42.5  3454 
+   2 Al     3454  91.8   74   74    40   14.5  36.2    6   17   17  15.0  42.5  3546 
+---------------------------------------------------------------------------------------------------------
+
+  Δ = delta from the next higher rated opponent
+  # = number of games played
+  Σ = total score, 1 point for win, 1/2 point for draw
+
+LOS:
+      Mi Al
+Mike     99
+Al     0   
+PGN File: 08070456.pgn
+Time Control: Time Control-> base+inc: 6+0.060
+Games: 10
+Threads: 1
+Hash: 16
+
+Current date : time (EDST)
+Date: 08/07/20 : 04:58:00
+
+Projected-> Time: 0h:1m:15s
+     Run -> Time: 0h:1m:19s
+
+Rank Name  Rating   Δ     +    -     #     Σ    Σ%     W    L    D   W%    =%   OppR 
+---------------------------------------------------------------------------------------------------------
+
+   1 Mike   3515   0.0  169  169    10    5.5  55.0    5    4    1  50.0  10.0  3485 
+   2 Al     3485  30.9  169  169    10    4.5  45.0    4    5    1  40.0  10.0  3515 
+---------------------------------------------------------------------------------------------------------
+
+  Δ = delta from the next higher rated opponent
+  # = number of games played
+  Σ = total score, 1 point for win, 1/2 point for draw
+
+LOS:
+      Mi Al
+Mike     63
+Al    36   
+PGN File: 08070503.pgn
+Time Control: Time Control-> base+inc: 6+0.060
+Games: 32
+Threads: 1
+Hash: 16
+
+Current date : time (EDST)
+Date: 08/07/20 : 05:03:46
+
+Projected-> Time: 0h:3m:18s
+     Run -> Time: 0h:0m:15s
+
+Rank Name  Rating   Δ     +    -     #     Σ    Σ%     W    L    D   W%    =%   OppR 
+---------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------
+
+  Δ = delta from the next higher rated opponent
+  # = number of games played
+  Σ = total score, 1 point for win, 1/2 point for draw
+
+LOS:
+PGN File: 08070504.pgn
+Time Control: Time Control-> base+inc: 6+0.060
+Games: 32
+Threads: 1
+Hash: 16
+
+Current date : time (EDST)
+Date: 08/07/20 : 05:07:55
+
+Projected-> Time: 0h:3m:18s
+     Run -> Time: 0h:3m:32s
+
+Rank Name  Rating   Δ     +    -     #     Σ    Σ%     W    L    D   W%    =%   OppR 
+---------------------------------------------------------------------------------------------------------
+
+   1 Al     3526   0.0   96   96    32   18.5  57.8   14    9    9  43.8  28.1  3474 
+   2 Mike   3474  52.0   96   96    32   13.5  42.2    9   14    9  28.1  28.1  3526 
+---------------------------------------------------------------------------------------------------------
+
+  Δ = delta from the next higher rated opponent
+  # = number of games played
+  Σ = total score, 1 point for win, 1/2 point for draw
+
+LOS:
+      Al Mi
+Al       85
+Mike  14   

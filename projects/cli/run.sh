@@ -45,7 +45,6 @@ echo "Date: $dat : $nowt"
 echo ""
 et=0
 startt=`date +%s`
-export PATH=$PATH:.
 ###############################################################################
 
 ############################## USER DEBUG OPTIONS ##############################
@@ -55,8 +54,8 @@ export PATH=$PATH:.
 ###############################################################################
 
 ################################# Game Time Settings #####################################
-base=10
-incf=50
+base=5
+incf=100
 ##  base/incf = inc, e.g. base 60 /60 = 1 sec inc ;
 #   base 60 / 100 = .6 sec inc; base= 60/ 30 = 2 sec inc
 # examples:
@@ -69,16 +68,20 @@ incf=50
 ################################################################################
 
 ################################### Rounds #####################################
-rounds=1500
+rounds=2
 # total num of games will be ( num of engines * (num of engines -1) * rounds
-concur=8 ## num of comcurrent games . threads * concur should ALWAYS be less than # of logical CPUS
+concur=4 ## num of comcurrent games . threads * concur should ALWAYS be less than # of logical CPUS
 
 ############################### ENGINE Options ################################
-hash="256"
-threads4=4
-threads8=8
-DIR="c:/cluster.mfb/Popcnt-LP"
-SYZYGY="option.SyzygyPath=c:/syzygy"
+hash="64"
+threads=1
+#threads2=2
+##  DIR="C:\Users\MichaelB7\home\Github\cutechess\projects\cli\engines" #Windows
+DIR="~/github/cutechess/projects/cli/engines"
+## SYZYGY="option.SyzygyPath=C:\Users\MichaelB7\home\Github\cutechess\projects\cli\syzygy"  #Windows
+SYZYGY="option.SyzygyPath=~/github/cutechess/projects/cli\syzygy"
+#TB="C:\Users\MichaelB7\home\Github\cutechess\projects\cli\syzygy"  # windows
+TB="~/github/cutechess/projects/cli/syzygy"
 # NN options
 NNE="UseNN"
 NNER="true" # or false
@@ -104,20 +107,22 @@ D29="29"; D30="30"; D31="31"
 
 #NET1="0109"
 NET1="1802"
-NET2="1802"
+NET2="1351"
 #NET3="1817"
 #NET4=""
 #NET5=""
 
 CMD1="Stockfish-XIr4.exe"
-ENG1="SF-T4-$NET1"
-EVFILE1="./eval/$Y20$M08$D06-$NET1.bin"
+ENG1="SF-XIr4-$NET1"
+#EVFILE1="C:/Users/MichaelB7/home/Github/cutechess/projects/cli/eval/$Y20$M08$D06-$NET1.bin"
+EVFILE1="~/github/cutechess/projects/cli/eval/$Y20$M08$D06-$NET1.bin" #windows
 echo "CMD1=$CMD1 ENG1=$ENG1 EVFILE1=$EVFILE1 "
 
 
 CMD2="Stockfish-XIr4.exe"
-ENG2="SF-T8-$NET2"
-EVFILE2="./eval/$Y20$M08$D06-$NET2.bin"
+ENG2="SF-XIr4-$NET2"
+#EVFILE2="C:/Users/MichaelB7/home/Github/cutechess/projects/cli/eval/$Y20$M08$D08-$NET2.bin"
+EVFILE2="~/github/cutechess/projects/cli/eval/$Y20$M08$D08-$NET2.bin"
 echo "CMD2=$CMD2 ENG2=$ENG2 EVFILE2=$EVFILE2 "
 
 #CMD3="Stockfish-XIr4.exe"
@@ -157,7 +162,7 @@ format=epd ## pgn or epd, pgn is the default
 #ofile="c:/cluster.mfb/Popcnt-LP/books/DRSullivan500.epd"
 # 500 posiiton file with more balanced lines
 
-ofile="c:/cluster.mfb/Popcnt-LP/books/NBSC_30k_5mvs.epd"
+ofile="./openings/NBSC_30k_5mvs.epd"
 # 30000 position file is very unbalance - favors white
 
 #order="sequential"  # option -> sequential or random
@@ -192,7 +197,7 @@ cute_runs=2
 
 ################################### PGN File ###################################
 #######Only change to manullay set pgn file ###
-pgn="c:/cluster.mfb/pgn/$DATE.pgn";
+pgn="./pgn/$DATE.pgn";
 #pgn="c:/cluster.mfb/pgn/0730xxxx.pgn"
 echo "PGN File: $pgn"; #echo ""
 ################################################################################
@@ -238,7 +243,7 @@ export checknum elo_chk engchk engines et fc games hash pgn secs startt tcd thre
 # unhash, also unhash rows 42 and 42 - for debugging
 
 ########################### Start Watcher Script ##############################
-start watcher.sh ## spawns off the watcher script which reports on progress on a periodic basis#
+#start watcher.sh ## spawns off the watcher script which reports on progress on a periodic basis#
 #read # hack used for testing - stops processing
 echo "Start running the chess match ..."
 ################################################################################
@@ -248,7 +253,8 @@ echo "Start running the chess match ..."
 ################################################################################
 # 1st cute chess run random book
 ########### Manually Update####################################################
-cutechess-cli $DEBUG -repeat -rounds $rounds -games 2 -tournament $tournament_type  -tb c:/syzygy -tbpieces 6 -resign movecount=1 score=700 twosided=true -draw movenumber=40 movecount=10 score=2 -concurrency $concur -openings file=$ofile format=$format order=$order plies=$PLY start=$START policy=$POLICY   -engine dir=$DIR name=$ENG1 cmd=$CMD1 option.EvalFile=$EVFILE1 option.$NNE=$NNER option.Threads=$threads4 -engine dir=$DIR name=$ENG2 cmd=$CMD2 option.EvalFile=$EVFILE2 option.$NNE=$NNER  option.Threads=$threads8 -each tc=$TC proto=uci  option.Hash=$hash $SYZYGY -pgnout $pgn 2>/dev/null
+
+cutechess-cli.exe $DEBUG -repeat -rounds $rounds -games 2 -tournament $tournament_type -resign movecount=1 score=700 twosided=true -draw movenumber=40 movecount=10 score=2 -concurrency $concur -openings file=$ofile format=$format order=$order plies=$PLY start=$START policy=$POLICY  -ratinginterval 10 -tb $TB  -tbpieces 5 -engine dir=$DIR name=$ENG1 cmd=$CMD1 option.EvalFile=$EVFILE1 option.$NNE=$NNER option.Threads=$threads -engine dir=$DIR name=$ENG2 cmd=$CMD2 option.EvalFile=$EVFILE2 option.$NNE=$NNER  option.Threads=$threads -each tc=$TC proto=uci  option.Hash=$hash $SYZYGY -pgnout $pgn 2>/dev/null
 
 # -engine dir=$DIR name=$ENG3 cmd=$CMD3 option.EvalFile=$EVFILE3 option.$NNE=$NNER
 #-engine dir=$DIR name=$ENG4 cmd=$CMD4 option.EvalFile=$EVFILE4 option.$NNE=$NNER -engine dir=$DIR name=$ENG5 cmd=$CMD5
@@ -271,11 +277,11 @@ cutechess-cli $DEBUG -repeat -rounds $rounds -games 2 -tournament $tournament_ty
 ################################################################################
 ################ 2nd Pass-Sequential Setup with different book #################
 # 500 posiiton file with more balanced lines
-ofile="c:/cluster.mfb/Popcnt-LP/books/DRSullivan500.epd"
+ofile="./openings/DRSullivan500.epd"
 order="sequential"  # option -> sequential or random
 #order="random"
 #2nd pass with sequential book
-cutechess-cli $DEBUG -repeat -rounds $rounds -games 2 -tournament $tournament_type -tb c:/syzygy -tbpieces 6 -resign movecount=1 score=700 twosided=true -draw movenumber=40 movecount=10 score=2 -concurrency $concur -openings file=$ofile format=$format order=$order plies=$PLY start=$START policy=$POLICY  -engine dir=$DIR name=$ENG1 cmd=$CMD1 option.EvalFile=$EVFILE1 option.$NNE=$NNER -engine dir=$DIR name=$ENG2 cmd=$CMD2 option.EvalFile=$EVFILE2 option.$NNE=$NNER  -each tc=$TC proto=uci option.Threads=$threads option.Hash=$hash $SYZYGY -pgnout $pgn 2>/DEV/NUL
+cutechess-cli.exe $DEBUG -repeat -rounds $rounds -games 2 -tournament $tournament_type -resign movecount=1 score=700 twosided=true -draw movenumber=40 movecount=10 score=2 -concurrency $concur -openings file=$ofile format=$format order=$order plies=$PLY start=$START policy=$POLICY  -ratinginterval 10 -tb $TB  -tbpieces 5 -engine dir=$DIR name=$ENG1 cmd=$CMD1 option.EvalFile=$EVFILE1 option.$NNE=$NNER option.Threads=$threads -engine dir=$DIR name=$ENG2 cmd=$CMD2 option.EvalFile=$EVFILE2 option.$NNE=$NNER  option.Threads=$threads -each tc=$TC proto=uci  option.Hash=$hash $SYZYGY -pgnout $pgn 2>/dev/null
 
 # -engine dir=$DIR name=$ENG3 cmd=$CMD3 option.EvalFile=$EVFILE3 option.$NNE=$NNER
 #-engine dir=$DIR name=$ENG4 cmd=$CMD4 option.EvalFile=$EVFILE4 option.$NNE=$NNER -engine dir=$DIR name=$ENG5 cmd=$CMD5

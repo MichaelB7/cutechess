@@ -48,8 +48,8 @@ startt=`date +%s`
 ###############################################################################
 
 ############################## USER DEBUG OPTIONS ##############################
-#set -x #verboose mode , useful for tracking down errors whe it does not run
-#db=1
+set -x #verboose mode , useful for tracking down errors whe it does not run
+db=1
 #echo $db # 0 = false, cutechess debug is  debug is off, 1 turns debug on, useful for debugging script
 ###############################################################################
 
@@ -70,21 +70,21 @@ incf=100
 ################################### Rounds #####################################
 rounds=2
 # total num of games will be ( num of engines * (num of engines -1) * rounds
-concur=4 ## num of comcurrent games . threads * concur should ALWAYS be less than # of logical CPUS
+concur=1 ## num of comcurrent games . threads * concur should ALWAYS be less than # of logical CPUS
 
 ############################### ENGINE Options ################################
-hash="64"
+hash=64
 threads=1
 #threads2=2
 ##  DIR="C:\Users\MichaelB7\home\Github\cutechess\projects\cli\engines" #Windows
-DIR="~/github/cutechess/projects/cli/engines"
+DIR="./engines"
 ## SYZYGY="option.SyzygyPath=C:\Users\MichaelB7\home\Github\cutechess\projects\cli\syzygy"  #Windows
-SYZYGY="option.SyzygyPath=~/github/cutechess/projects/cli\syzygy"
+SYZYGY="option.SyzygyPath=~./syzygy"
 #TB="C:\Users\MichaelB7\home\Github\cutechess\projects\cli\syzygy"  # windows
-TB="~/github/cutechess/projects/cli/syzygy"
+TB="./syzygy"
 # NN options
 NNE="UseNN"
-NNER="true" # or false
+NNER="false" # or false
 ################################################################################
 
 ############################### NUMBER OF ENGINES #############################
@@ -112,48 +112,19 @@ NET2="1351"
 #NET4=""
 #NET5=""
 
-CMD1="Stockfish-XIr4.exe"
+CMD1="./Stockfish-XIr4"
 ENG1="SF-XIr4-$NET1"
 #EVFILE1="C:/Users/MichaelB7/home/Github/cutechess/projects/cli/eval/$Y20$M08$D06-$NET1.bin"
-EVFILE1="~/github/cutechess/projects/cli/eval/$Y20$M08$D06-$NET1.bin" #windows
+EVFILE1="./eval/$Y20$M08$D06-$NET1.bin" #windows
 echo "CMD1=$CMD1 ENG1=$ENG1 EVFILE1=$EVFILE1 "
 
 
-CMD2="Stockfish-XIr4.exe"
+CMD2="./Stockfish-XIr4"
 ENG2="SF-XIr4-$NET2"
 #EVFILE2="C:/Users/MichaelB7/home/Github/cutechess/projects/cli/eval/$Y20$M08$D08-$NET2.bin"
-EVFILE2="~/github/cutechess/projects/cli/eval/$Y20$M08$D08-$NET2.bin"
+EVFILE2="./eval/$Y20$M08$D08-$NET2.bin"
 echo "CMD2=$CMD2 ENG2=$ENG2 EVFILE2=$EVFILE2 "
 
-#CMD3="Stockfish-XIr4.exe"
-#ENG3="SF-XIr4-$NET3"
-#EVFILE3="./eval/$Y20$M8$D04-$NET3.bin"
-#echo "CMD2=$CMD23 ENG2=$ENG3 EVFILE2=$EVFILE3 "
-
-#CMD4="Stockfish-XIr4.exe"
-#ENG4="SF-XIr4-$NET2"
-#EVFILE4="./eval/$Y20$M8$D01-$NET4.bin"
-#echo "CMD4=$CMD4 ENG2=$ENG4 EVFILE2=$EVFILE4 "
-#
-#CMD2="Honey-XIr4.exe"
-#ENG2="Honey-XIr4-$NET2"
-#EVFILE2="./eval/$Y20$M8$D01-$NET2.bin"
-#echo "CMD2=$CMD2 ENG2=$ENG2 EVFILE2=$EVFILE2 "
-
-#CMD3="Bluefish-XIr4.exe"
-#ENG3="Bluefish-XIr4-$NET3"
-#EVFILE3="./eval/$Y20$M8$D01-$NET3.bin"
-#echo "CMD2=$CMD23 ENG2=$ENG3 EVFILE2=$EVFILE3 "
-
-#CMD4="Black-Diamond-XIr4.exe"
-#ENG4="Black-Diamond-XIr4-$NET2"
-#EVFILE4="./eval/$Y20$M8$D01-$NET4.bin"
-#echo "CMD4=$CMD4 ENG2=$ENG4 EVFILE2=$EVFILE4 "
-
-#CMD5="stockfish.exe"
-#ENG5="cur-dev-stockfish"
-#EVFILE5=""
-#echo "CMD5=$CMD5 ENG5=$ENG5 EVFILE5=$EVFILE5 "
 ###############################################################################
 
 ############################### TOURNAMENT OPTIONS #############################
@@ -165,8 +136,8 @@ format=epd ## pgn or epd, pgn is the default
 ofile="./openings/NBSC_30k_5mvs.epd"
 # 30000 position file is very unbalance - favors white
 
-#order="sequential"  # option -> sequential or random
-order="random"
+order="sequential"  # option -> sequential or random
+#order="random"
 START=1             # Used with 'sequential' order only, START is the number of the first opening that will be played. The minimum value for START is 1 (default).
 PLY=8               # The opening depth is limited to PLIES plies. If PLIES not set the opening depth is unlimited.
 
@@ -244,7 +215,7 @@ export checknum elo_chk engchk engines et fc games hash pgn secs startt tcd thre
 
 ########################### Start Watcher Script ##############################
 #start watcher.sh ## spawns off the watcher script which reports on progress on a periodic basis#
-#read # hack used for testing - stops processing
+read # hack used for testing - stops processing
 echo "Start running the chess match ..."
 ################################################################################
 
@@ -254,8 +225,9 @@ echo "Start running the chess match ..."
 # 1st cute chess run random book
 ########### Manually Update####################################################
 
-cutechess-cli.exe $DEBUG -repeat -rounds $rounds -games 2 -tournament $tournament_type -resign movecount=1 score=700 twosided=true -draw movenumber=40 movecount=10 score=2 -concurrency $concur -openings file=$ofile format=$format order=$order plies=$PLY start=$START policy=$POLICY  -ratinginterval 10 -tb $TB  -tbpieces 5 -engine dir=$DIR name=$ENG1 cmd=$CMD1 option.EvalFile=$EVFILE1 option.$NNE=$NNER option.Threads=$threads -engine dir=$DIR name=$ENG2 cmd=$CMD2 option.EvalFile=$EVFILE2 option.$NNE=$NNER  option.Threads=$threads -each tc=$TC proto=uci  option.Hash=$hash $SYZYGY -pgnout $pgn 2>/dev/null
+./cutechess-cli $DEBUG -repeat -rounds $rounds -games 2 -tournament $tournament_type -resign movecount=1 score=700 twosided=true -draw movenumber=40 movecount=10 score=2 -concurrency $concur -openings file=$ofile format=$format order=$order plies=$PLY start=$START policy=$POLICY  -ratinginterval 10  -engine dir=$DIR name=$ENG1 cmd=$CMD1 option.EvalFile=$EVFILE1 option.$NNE=$NNER option.Threads=$threads -engine dir=$DIR name=$ENG2 cmd=$CMD2 option.EvalFile=$EVFILE2 option.$NNE=$NNER  option.Threads=$threads -each tc=$TC proto=uci  option.Hash=$hash $SYZYGY -pgnout $pgn 
 
+read
 # -engine dir=$DIR name=$ENG3 cmd=$CMD3 option.EvalFile=$EVFILE3 option.$NNE=$NNER
 #-engine dir=$DIR name=$ENG4 cmd=$CMD4 option.EvalFile=$EVFILE4 option.$NNE=$NNER -engine dir=$DIR name=$ENG5 cmd=$CMD5
 #c:/cluster.mfb/Popcnt-LP/080120.txt - you also hard code GN if needed
